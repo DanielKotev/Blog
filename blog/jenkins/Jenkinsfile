@@ -12,9 +12,9 @@ pipeline {
          stage('Setup') { 
       steps {
         script {
-          sh """
-         ../venv/Scripts/activate
-          """
+         sh """
+        . .env/bin/activate
+        """
         }
       }
     }
