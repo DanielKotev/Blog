@@ -12,9 +12,10 @@ pipeline {
          stage('Setup') { 
       steps {
         script {
-         sh """
-        . .env/bin/activate
-        """
+                    sh """
+            . .venv/bin/activate
+            pip install -r requirements/test.txt
+            """
         }
       }
     }
