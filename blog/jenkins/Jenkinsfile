@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+    environment {
+        RELEASE = "TEST"
+    }
+    stages {
+        stage('Build') {
+            environment {
+                LOG_LEVEL = "INFO"
+            }
+            steps {
+                sh 'virtualenv venv && . venv/bin/activate && pip install -r requirements.txt '
+            }
+        }
+    }
+}
