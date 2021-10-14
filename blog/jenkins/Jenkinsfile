@@ -4,12 +4,6 @@ pipeline {
         RELEASE = "automated CI"
     }
     stages {
-        stage('Checkout') {
-            steps{
-             checkout scm
-             }
-        
-
          stage('Setup') {
             steps {
                 script {
