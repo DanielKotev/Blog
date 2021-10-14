@@ -5,11 +5,10 @@ pipeline {
     }
     stages {
         stage('Checkout') {
-            steps {
-                script{
-            bat""" checkout scm"""
-                }
-        }
+            steps{
+             checkout scm
+             }
+        
 
          stage('Setup') {
             steps {
