@@ -1,33 +1,42 @@
 pipeline {
     agent any
     environment {
-        RELEASE = "TEST"
+        RELEASE = "automated CI"
     }
     stages {
         stage('Checkout') {
             steps {
-            checkout scm 
-             script {
-                  bat  """
-                    ./venv/Scripts/activate 
-                   
-            """
-            
-                }
-            }
-            
+            checkout scm
         }
-        
-         stage('Setup') { 
+
+         stage('Setup') {
             steps {
                 script {
-                   bat  """
-                    pip install -r requirements.txt 
-                   
-                     """
-            
+                    bat  """
+                    ./venv/Scripts/activate
+                    pip install -r requirements.txt """
                     }
                 }
-         }
+            }
+        stage('MYPY-Test') {
+            steps{
+            script{
+                try{
+            bat """ python -m mypy blog """  // failure
+            }
+            catch(err ){
+                echo err.getMessage()
+                    }
+                }
+            }
+        }
+         stage('Flask-run') {
+            steps {
+                script {
+                     bat  """python run.py
+                     """
+                }
+            }
+        }
     }
 }
